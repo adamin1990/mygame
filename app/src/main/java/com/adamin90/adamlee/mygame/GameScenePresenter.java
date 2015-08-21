@@ -14,9 +14,9 @@ import android.view.View;
 import com.adamin90.adamlee.mygame.mvp.ViewPresenter;
 import com.adamin90.adamlee.mygame.util.FontCache;
 import com.adamin90.adamlee.mygame.util.Views;
-import com.google.android.gms.analytics.GoogleAnalytics;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
+//import com.google.android.gms.analytics.GoogleAnalytics;
+//import com.google.android.gms.analytics.HitBuilders;
+//import com.google.android.gms.analytics.Tracker;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -30,13 +30,17 @@ class GameScenePresenter extends ViewPresenter<GameSceneView>  implements GameSc
     private static GameScenePresenter a;
     private GameBoard b;
     private LevelManager c;
-    private Tracker d;
+//    private Tracker d;
     private long e;
     private long f;
 
-//    public  void attachView(View view) {
-//        a((GameSceneView) view);
-//    }
+    @Override
+    public void attachView(GameSceneView gameSceneView) {
+        super.attachView(gameSceneView);
+        a(gameSceneView);
+    }
+
+
 
     static GameScenePresenter a(Context context) {
         if (a == null) {
@@ -54,12 +58,12 @@ class GameScenePresenter extends ViewPresenter<GameSceneView>  implements GameSc
 
     private GameScenePresenter(Context context) {
         this.c = LevelManager.a(context);
-        GoogleAnalytics instance = GoogleAnalytics.getInstance(context.getApplicationContext());
-        instance.setLocalDispatchPeriod(20);
-        this.d = instance.newTracker("UA-38705998-8");
-        this.d.enableExceptionReporting(true);
-        this.d.enableAutoActivityTracking(true);
-        this.d.enableAdvertisingIdCollection(false);
+//        GoogleAnalytics instance = GoogleAnalytics.getInstance(context.getApplicationContext());
+//        instance.setLocalDispatchPeriod(20);
+//        this.d = instance.newTracker("UA-38705998-8");
+//        this.d.enableExceptionReporting(true);
+//        this.d.enableAutoActivityTracking(true);
+//        this.d.enableAdvertisingIdCollection(false);
     }
 
     public int getColumnCount() {
@@ -83,8 +87,8 @@ class GameScenePresenter extends ViewPresenter<GameSceneView>  implements GameSc
         if (this.b.a()) {
             String format = String.format("%05d", new Object[]{Integer.valueOf(this.c.c() + 1)});
             long currentTimeMillis = (System.currentTimeMillis() - this.f) - this.e;
-            a("level_completed_with_duration", format, currentTimeMillis);
-            a("level_duration", currentTimeMillis, format);
+//            a("level_completed_with_duration", format, currentTimeMillis);
+//            a("level_duration", currentTimeMillis, format);
             this.e = 0;
             Log.e("Debug", "finished level in " + currentTimeMillis);
             this.c.d();
@@ -99,7 +103,7 @@ class GameScenePresenter extends ViewPresenter<GameSceneView>  implements GameSc
         this.c.b();
         this.b = this.c.a();
         this.f = System.currentTimeMillis();
-        a("level_started", String.format("%05d", new Object[]{Integer.valueOf(this.c.c() + 1)}), 0);
+//        a("level_started", String.format("%05d", new Object[]{Integer.valueOf(this.c.c() + 1)}), 0);
         GameOptionsPresenter.a().b();
         if (getView() != null) {
             ((GameSceneView) getView()).a(this.c.c() + 1, this.c.a, z);
@@ -118,7 +122,7 @@ class GameScenePresenter extends ViewPresenter<GameSceneView>  implements GameSc
 
     public void a(GameSceneView gameSceneView) {
         super.attachView(gameSceneView);
-        a("started", null, 0);
+//        a("started", null, 0);
         startNewGame(true);
         if (isGamePaused()) {
             ((GameSceneView) getView()).a(true, false);
@@ -135,11 +139,11 @@ class GameScenePresenter extends ViewPresenter<GameSceneView>  implements GameSc
         this.e += j;
     }
 
-    void a(String str, String str2, long j) {
-        this.d.send(new HitBuilders.EventBuilder().setCategory("game_action").setAction(str).setLabel(str2).setValue(j).build());
-    }
-
-    void a(String str, long j, String str2) {
-        this.d.send(new HitBuilders.TimingBuilder().setCategory("game_action").setVariable(str).setValue(j).setLabel(str2).build());
-    }
+//    void a(String str, String str2, long j) {
+//        this.d.send(new HitBuilders.EventBuilder().setCategory("game_action").setAction(str).setLabel(str2).setValue(j).build());
+//    }
+//
+//    void a(String str, long j, String str2) {
+//        this.d.send(new HitBuilders.TimingBuilder().setCategory("game_action").setVariable(str).setValue(j).setLabel(str2).build());
+//    }
 }

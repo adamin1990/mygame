@@ -98,7 +98,7 @@ public class GameOptionsPresenter extends ViewPresenter<GameOptionsView> impleme
     }
 
     public void screenshot() {
-        GameScenePresenter.a().a("screenshot", String.valueOf(this.b.c()), 0);
+//        GameScenePresenter.a().a("screenshot", String.valueOf(this.b.c()), 0);
         GameSceneView gameSceneView = (GameSceneView) GameScenePresenter.a().getView();
         if (gameSceneView != null) {
             Context context = gameSceneView.getContext();
@@ -119,11 +119,11 @@ public class GameOptionsPresenter extends ViewPresenter<GameOptionsView> impleme
             paint.setTextSize((float) Views.dpToPx(context, 16.0f));
             paint.setTypeface(FontCache.loadFont(context, FontCache.LIGHT));
             paint.setAlpha(153);
-            canvas.drawText("loopgame.co", (float) (canvas.getWidth() / 2), (float) (canvas.getHeight() - Views.dpToPx(context, 25.0f)), paint);
+            canvas.drawText("lixiaopeng.top", (float) (canvas.getWidth() / 2), (float) (canvas.getHeight() - Views.dpToPx(context, 25.0f)), paint);
             Parcelable a = a(gameSceneView.getContext(), createBitmap, this.b.c());
             Intent intent = new Intent();
             intent.setAction("android.intent.action.SEND");
-            intent.putExtra("android.intent.extra.TEXT", String.format("Loop %s http://loopgame.co", new Object[]{format}));
+            intent.putExtra("android.intent.extra.TEXT", String.format("Loop %s http://lixiaopeng.top", new Object[]{format}));
             intent.putExtra("android.intent.extra.STREAM", a);
             intent.setType("image/*");
             gameSceneView.getContext().startActivity(Intent.createChooser(intent, "Share Image"));

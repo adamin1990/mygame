@@ -23,8 +23,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         GameSceneView gameSceneView = (GameSceneView) findViewById(R.id.game_scene_view);
-//        gameSceneView.measure(View.MeasureSpec.makeMeasureSpec(displayMetrics.widthPixels, View.MeasureSpec.EXACTLY), View.MeasureSpec.makeMeasureSpec(displayMetrics.heightPixels, View.MeasureSpec.EXACTLY));
-//        gameSceneView.layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels);
+        gameSceneView.measure(View.MeasureSpec.makeMeasureSpec(displayMetrics.widthPixels, View.MeasureSpec.EXACTLY), View.MeasureSpec.makeMeasureSpec(displayMetrics.heightPixels, View.MeasureSpec.EXACTLY));
+        gameSceneView.layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels);
 
     }
 

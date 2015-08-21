@@ -1,5 +1,8 @@
 package com.adamin90.adamlee.mygame;
 
+//import com.google.android.gms.common.api.CommonStatusCodes;
+//import com.google.android.gms.common.api.GoogleApiClient;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -98,20 +101,20 @@ class GameBoardCell {
     GameBoardCell b(GameBoard.Edge edge) {
         int i = this.a;
         int i2 = this.b;
-//        switch (AnonymousClass1.a[edge.ordinal()]) {
-//            case ConnectionCallbacks.CAUSE_SERVICE_DISCONNECTED /*1*/:
-//                i2--;
-//                break;
-//            case ConnectionCallbacks.CAUSE_NETWORK_LOST /*2*/:
-//                i++;
-//                break;
-//            case CommonStatusCodes.SERVICE_DISABLED /*3*/:
-//                i2++;
-//                break;
-//            case CommonStatusCodes.SIGN_IN_REQUIRED /*4*/:
-//                i--;
-//                break;
-//        }
+        switch (AnonymousClass1.a[edge.ordinal()]) {
+            case 1 /*1*/:
+                i2--;
+                break;
+            case 2 /*2*/:
+                i++;
+                break;
+            case 3 /*3*/:
+                i2++;
+                break;
+            case 4 /*4*/:
+                i--;
+                break;
+        }
         if (i < 0 || i >= this.f.a || i2 < 0 || i2 >= this.f.b) {
             return null;
         }
