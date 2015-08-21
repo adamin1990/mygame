@@ -19,7 +19,7 @@ public class GameBoard {
     GameBoardCell[][] c;
     private final PMRandom d;
 
-   public enum Edge {
+    enum Edge {
         TOP,
         RIGHT,
         BOTTOM,
@@ -102,11 +102,17 @@ public class GameBoard {
         return true;
     }
 
-    private void a(float f) {
-        a(Gameboardlabmda1.a(this, ((double) this.d.b()) > 0.7d, f));
+    private void a(final float f) {
+//        a(GameBoard$$Lambda$1.a(this, ((double) this.d.b()) > 0.7d, f));
+        a(new Action1<GameBoardCell>() {
+            @Override
+            public void call(GameBoardCell gameBoardCell) {
+                a(((double) d.b())>0.7d,f,gameBoardCell);
+            }
+        });
     }
 
-    protected/* synthetic */ void a(boolean z, float f, GameBoardCell gameBoardCell) {
+    private /* synthetic */ void a(boolean z, float f, GameBoardCell gameBoardCell) {
         boolean z2 = true;
         if (((double) gameBoardCell.a) <= Math.ceil((double) (((float) this.a) - 1.0f)) / 2.0d) {
             if (((double) gameBoardCell.b) <= Math.ceil((double) (((float) this.b) - 1.0f)) / 2.0d || !z) {
@@ -137,13 +143,19 @@ public class GameBoard {
         }
     }
 
-    private void b(float f) {
-        a(Gameboardlabmda2.a(this, f));
+    private void b(final float f) {
+//        a(GameBoard$$Lambda$2.a(this, f));
+        a(new Action1<GameBoardCell>() {
+            @Override
+            public void call(GameBoardCell gameBoardCell) {
+                a(f,gameBoardCell);
+            }
+        });
         b();
         c();
     }
 
-    public   void a(float f, GameBoardCell gameBoardCell) {
+    private /* synthetic */ void a(float f, GameBoardCell gameBoardCell) {
         boolean z = true;
         if (!gameBoardCell.e.contains(Edge.TOP)) {
             gameBoardCell.a(Edge.TOP, this.d.b() > f);
@@ -158,10 +170,16 @@ public class GameBoard {
     }
 
     private void b() {
-        a(Gameboardlabmda3.a(this));
+//        a(GameBoard$$Lambda$3.a(this));
+        a(new Action1<GameBoardCell>() {
+            @Override
+            public void call(GameBoardCell gameBoardCell) {
+                b(gameBoardCell);
+            }
+        });
     }
 
-    public  /* synthetic */ void b(GameBoardCell gameBoardCell) {
+    private /* synthetic */ void b(GameBoardCell gameBoardCell) {
         if (gameBoardCell.b() <= 1) {
             for (Edge edge : Edge.values()) {
                 GameBoardCell b = gameBoardCell.b(edge);
@@ -174,10 +192,16 @@ public class GameBoard {
     }
 
     private void c() {
-        a(Gameboardlabmda4.a(this));
+//        a(GameBoard$$Lambda$4.a(this));
+        a(new Action1<GameBoardCell>() {
+            @Override
+            public void call(GameBoardCell gameBoardCell) {
+              a(gameBoardCell);
+            }
+        });
     }
 
-    public  /* synthetic */ void a(GameBoardCell gameBoardCell) {
+    private /* synthetic */ void a(GameBoardCell gameBoardCell) {
         if (gameBoardCell.b() >= 4) {
             for (Edge edge : Edge.values()) {
                 if (gameBoardCell.b(edge) != null && this.d.b() > 0.95f) {
@@ -194,7 +218,4 @@ public class GameBoard {
             }
         }
     }
-
-
-
 }
