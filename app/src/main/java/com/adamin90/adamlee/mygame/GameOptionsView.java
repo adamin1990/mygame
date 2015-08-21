@@ -66,7 +66,7 @@ public class GameOptionsView extends RelativeLayout {
     @InjectView(R.id.game_options_sound_outer)
     ImageView soundOuter;
 
-    public interface Presenter extends ViewAttacher<GameOptionsView> {
+    interface Presenter extends ViewAttacher<GameOptionsView> {
         boolean isMenuExpanded();
 
         boolean isNextEnabled();
@@ -115,6 +115,9 @@ public class GameOptionsView extends RelativeLayout {
         this.g = -1;
         this.a = GameOptionsPresenter.a(getContext());
         this.c = getResources().getDimensionPixelSize(R.dimen.options_item_size);
+        m=new AnimatorSet();
+        n=new AnimatorSet();
+        o=new AnimatorSet();
         this.e = this.c + (getResources().getDimensionPixelSize(R.dimen.options_close_spacing) / 2);
         this.d = (int) ((((float) this.c) * 0.8f) + ((float) getResources().getDimensionPixelSize(R.dimen.options_item_spacing)));
     }
@@ -122,7 +125,7 @@ public class GameOptionsView extends RelativeLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
         ButterKnife.inject((View) this);
-        a();
+//        a();
     }
 
     protected void onAttachedToWindow() {
@@ -132,8 +135,8 @@ public class GameOptionsView extends RelativeLayout {
 
     protected void onDetachedFromWindow() {
         this.a.detachView(this);
-        this.n = null;
-        this.m = null;
+        this.n = new AnimatorSet();
+        this.m = new AnimatorSet();
         super.onDetachedFromWindow();
     }
 
@@ -184,17 +187,18 @@ public class GameOptionsView extends RelativeLayout {
         valueAnimator.setDuration(500);
         valueAnimator.setObjectValues(new Object[]{Integer.valueOf(this.f), Integer.valueOf(this.h)});
         valueAnimator.setEvaluator(b);
+//        valueAnimator.addUpdateListener(GameOptionsView$$Lambda$1.a(this));
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 c(animation);
             }
         });
-//        valueAnimator.addUpdateListener(GameOptionsView$$Lambda$1.a(this));
         ValueAnimator valueAnimator2 = new ValueAnimator();
         valueAnimator2.setDuration(500);
         valueAnimator2.setObjectValues(new Object[]{Integer.valueOf(this.g), Integer.valueOf(this.i)});
         valueAnimator2.setEvaluator(b);
+//        valueAnimator2.addUpdateListener(GameOptionsView$$Lambda$2.a(this));
         valueAnimator2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
@@ -360,26 +364,24 @@ public class GameOptionsView extends RelativeLayout {
     }
 
     public void setScreenshotVisible(boolean z) {
-        if (!z && this.screenshot.getVisibility() == VISIBLE) {
+        // if visible
+        if (!z && this.screenshot.getVisibility() ==View.VISIBLE) {
             this.screenshot.animate().alpha(0.0f).setDuration(200).setListener(new AnimatorListenerAdapter() {
-                final /* synthetic */ GameOptionsView a;
-
-                {
-                    this.a = new GameOptionsView(getContext(),null);
-                }
 
                 public void onAnimationEnd(Animator animator) {
-                    this.a.screenshot.setVisibility(INVISIBLE);
+                    screenshot.setVisibility(View.INVISIBLE);
                 }
             }).start();
-        } else if (this.screenshot.getVisibility() == INVISIBLE) {
-            this.screenshot.setVisibility(VISIBLE);
+        }
+        else if (this.screenshot.getVisibility() ==View.INVISIBLE) {
+            this.screenshot.setVisibility(View.VISIBLE);
             this.screenshot.animate().alpha(1.0f).setDuration(200).setListener(null).start();
         }
+//        ButterKnife.apply(Arrays.asList(new View[]{this.soundContainer, this.next, this.previous}), GameOptionsView$$Lambda$3.a());
         ButterKnife.apply(Arrays.asList(new View[]{this.soundContainer, this.next, this.previous}), new ButterKnife.Action<View>() {
             @Override
             public void apply(View view, int index) {
-                view.setVisibility(INVISIBLE);
+                view.setVisibility(View.INVISIBLE);
             }
         });
         if (z) {
@@ -387,6 +389,7 @@ public class GameOptionsView extends RelativeLayout {
             return;
         }
         ValueAnimator ofFloat = ValueAnimator.ofFloat(new float[]{0.0f, 0.2f});
+//        ofFloat.addUpdateListener(GameOptionsView$$Lambda$4.a(this));
         ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
@@ -394,25 +397,20 @@ public class GameOptionsView extends RelativeLayout {
             }
         });
         ofFloat.addListener(new AnimatorListenerAdapter() {
-            final /* synthetic */ GameOptionsView a;
-
-            {
-                this.a = new GameOptionsView(getContext(),null);
-            }
 
             public void onAnimationStart(Animator animator) {
-                this.a.k = true;
-
-                ButterKnife.apply(Arrays.asList(new View[]{this.a.soundContainer, this.a.next, this.a.previous}), new ButterKnife.Action<View>() {
+                k = true;
+//                ButterKnife.apply(Arrays.asList(new View[]{this.a.soundContainer, this.a.next, this.a.previous}), GameOptionsView$2$$Lambda$1.a());
+                ButterKnife.apply(Arrays.asList(new View[]{soundContainer, next, previous}), new ButterKnife.Action<View>() {
                     @Override
                     public void apply(View view, int index) {
-                        view.setVisibility(VISIBLE);
+                        view.setVisibility(View.VISIBLE);
                     }
                 });
             }
 
             public void onAnimationEnd(Animator animator) {
-                this.a.k = false;
+                k = false;
             }
         });
         ofFloat.setStartDelay(1200);
@@ -421,14 +419,14 @@ public class GameOptionsView extends RelativeLayout {
     }
 
     private /* synthetic */ void a(final ValueAnimator valueAnimator) {
+//        ButterKnife.apply(Arrays.asList(new View[]{this.soundContainer, this.next, this.previous}), GameOptionsView$$Lambda$6.a(valueAnimator));
         ButterKnife.apply(Arrays.asList(new View[]{this.soundContainer, this.next, this.previous}), new ButterKnife.Action<View>() {
-                    @Override
-                    public void apply(View view, int index) {
-                        view.setAlpha(((Float) valueAnimator.getAnimatedValue()).floatValue());
+            @Override
+            public void apply(View view, int index) {
+                view.setAlpha(((Float) valueAnimator.getAnimatedValue()).floatValue());
 
-                    }
-                }
-        );
+            }
+        });
     }
 
     void setSoundEnabled(final boolean z) {
@@ -437,6 +435,7 @@ public class GameOptionsView extends RelativeLayout {
             @Override
             public void apply(ImageView view, int index) {
                 ((ImageView) view).setAlpha(z ? 1.0f : 0.2f);
+
 
             }
         });
@@ -450,38 +449,29 @@ public class GameOptionsView extends RelativeLayout {
         duration.setInterpolator(new AccelerateInterpolator());
         this.n.playTogether(new Animator[]{a(this.soundContainer, false, 0, this.e, 50), a(this.next, false, -this.d, this.e, 0), a(this.previous, false, this.d, this.e, 0), duration});
         this.n.addListener(new AnimatorListenerAdapter() {
-            final /* synthetic */ GameOptionsView a;
 
-            {
-                this.a = new GameOptionsView(getContext(), null);
-            }
 
             public void onAnimationStart(Animator animator) {
-                this.a.setOptionItemsClickable(false);
+                setOptionItemsClickable(false);
             }
 
             public void onAnimationEnd(Animator animator) {
-                TintUtils.tintImages(Arrays.asList(new ImageView[]{this.a.next, this.a.previous, this.a.soundInner, this.a.soundMiddle, this.a.soundOuter}), Integer.valueOf(0));
+                TintUtils.tintImages(Arrays.asList(new ImageView[]{next, previous, soundInner, soundMiddle, soundOuter}), Integer.valueOf(0));
             }
         });
-       ObjectAnimator r7= ObjectAnimator.ofFloat(this.close, View.TRANSLATION_Y, new float[]{0.0f}).setDuration(250);
+      ObjectAnimator r7=  ObjectAnimator.ofFloat(this.close, View.TRANSLATION_Y, new float[]{0.0f});
+        r7.setDuration(250);
         r7.setStartDelay(50);
         duration.setInterpolator(new DecelerateInterpolator(3.0f));
         this.m.playTogether(new Animator[]{a(this.soundContainer, true, 0, 0, 0), a(this.next, true, 0, 0, 50), a(this.previous, true, 0, 0, 50), r7});
         this.m.addListener(new AnimatorListenerAdapter() {
-            final /* synthetic */ GameOptionsView a;
-
-            {
-                this.a = new GameOptionsView(getContext(),null);
-                ;
-            }
 
             public void onAnimationStart(Animator animator) {
-                TintUtils.tintImages(Arrays.asList(new ImageView[]{this.a.next, this.a.previous, this.a.soundInner, this.a.soundMiddle, this.a.soundOuter}), Integer.valueOf(this.a.h));
+                TintUtils.tintImages(Arrays.asList(new ImageView[]{next, previous, soundInner, soundMiddle, soundOuter}), Integer.valueOf(h));
             }
 
             public void onAnimationEnd(Animator animator) {
-                this.a.setOptionItemsClickable(true);
+                setOptionItemsClickable(true);
             }
         });
     }
@@ -586,10 +576,12 @@ public class GameOptionsView extends RelativeLayout {
             ImageView imageView = this.soundOuter;
         }
         Object obj2 = z ? this.soundOuter : this.soundInner;
-        ObjectAnimator objectAnimator1 = ObjectAnimator.ofFloat((View) obj, View.ALPHA, new float[]{f}).setDuration(200);
-        ObjectAnimator objectAnimator2 = ObjectAnimator.ofFloat(this.soundMiddle, View.ALPHA, new float[]{f}).setDuration(200);
+      ObjectAnimator objectAnimator1=  ObjectAnimator.ofFloat((View) obj, View.ALPHA, new float[]{f}).setDuration(200);
+        ObjectAnimator objectAnimator2=  ObjectAnimator.ofFloat(this.soundMiddle, View.ALPHA, new float[]{f});
+        objectAnimator2.setDuration(200);
         objectAnimator2.setStartDelay(100);
-        ObjectAnimator objectAnimator3 = ObjectAnimator.ofFloat((View) obj2, View.ALPHA, new float[]{f}).setDuration(200);
+       ObjectAnimator objectAnimator3= ObjectAnimator.ofFloat((View) obj2, View.ALPHA, new float[]{f});
+        objectAnimator3.setDuration(200);
         objectAnimator3.setStartDelay(200);
         this.l = new AnimatorSet();
         this.l.playTogether(new Animator[]{objectAnimator1, objectAnimator2, objectAnimator3});
@@ -597,4 +589,16 @@ public class GameOptionsView extends RelativeLayout {
     }
 
 
+    final /* synthetic */ class GameOptionsViewlambda1 implements ValueAnimator.AnimatorUpdateListener {
+        private final GameOptionsView a;
+
+        private GameOptionsViewlambda1(GameOptionsView gameOptionsView) {
+            this.a = gameOptionsView;
+        }
+
+
+        public void onAnimationUpdate(ValueAnimator valueAnimator) {
+            this.a.c(valueAnimator);
+        }
+    }
 }

@@ -15,7 +15,15 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom">
-
+        <ImageView
+            android:id="@+id/game_options_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/options_close_spacing"
+            android:contentDescription="@string/close_menu"
+            android:src="@drawable/ic_close" />
         <FrameLayout
             android:id="@+id/game_options_sound_container"
             android:layout_width="wrap_content"
@@ -72,6 +80,7 @@
             android:id="@+id/game_options_open"
             android:layout_width="@dimen/options_item_size"
             android:layout_height="@dimen/options_item_size"
+            android:contentDescription="ViewViewView"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true" />
 
@@ -86,14 +95,6 @@
             android:src="@drawable/ic_screenshot"
             android:visibility="invisible" />
 
-        <ImageView
-            android:id="@+id/game_options_close"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/options_close_spacing"
-            android:contentDescription="@string/close_menu"
-            android:src="@drawable/ic_close" />
+
     </com.adamin90.adamlee.mygame.GameOptionsView>
 </FrameLayout>
