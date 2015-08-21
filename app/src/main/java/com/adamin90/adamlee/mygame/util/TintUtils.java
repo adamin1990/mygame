@@ -42,7 +42,7 @@ public final class TintUtils {
             return a;
         }
         a = new PorterDuffColorFilter(i, mode);
-        ca.a(i, mode, a);
+        ca.a(i, mode, (PorterDuffColorFilter)a);
         return a;
     }
 
